@@ -31,7 +31,6 @@ def train_task(task_name, norm_method, dataset):
     root = './data'
     start_epoch = 0
     epochs = 10
-    from torch.optim.lr_scheduler import MultiStepLR, CosineAnnealingLR
 
     optimizer_VIT = torch.optim.Adam(model_VIT.parameters(), lr)
     optimizer_T2T = torch.optim.Adam(model_T2T.parameters(), lr)
@@ -55,26 +54,24 @@ def train_task(task_name, norm_method, dataset):
         trainer_T2T.test_step(epoch)
         # trainer_T2T.save(epoch)
 
-        # trainer_VIT.train_step(epoch)
-        # trainer_VIT.test_step(epoch)
+        trainer_VIT.train_step(epoch)
+        trainer_VIT.test_step(epoch)
         # trainer_VIT.save(epoch)
 
     trainer_STV2.save(epoch)
     trainer_T2T.save(epoch)
-    # trainer_VIT.save(epoch)
+    trainer_VIT.save(epoch)
 
-# train_task('cifar100_BN', BatchNorm, 'cifar100')
-# train_task('cifar100_LN', LayerNorm, 'cifar100')
-# train_task('cifar100_GN', GroupNorm, 'cifar100')
-# train_task('cifar100_IN', InstanceNorm, 'cifar100')
-# train_task('cifar100_PN', PowerNorm, 'cifar100')
-# train_task('cifar100_UN', UnifiedNorm, 'cifar100')
-# train_task('cifar100_MABN', MABatchNorm, 'cifar100')
+train_task('cifar100_BN', BatchNorm, 'cifar100')
+train_task('cifar100_LN', LayerNorm, 'cifar100')
+train_task('cifar100_GN', GroupNorm, 'cifar100')
+train_task('cifar100_PN', PowerNorm, 'cifar100')
+train_task('cifar100_UN', UnifiedNorm, 'cifar100')
+train_task('cifar100_MABN', MABatchNorm, 'cifar100')
 
 train_task('cifar10_BN', BatchNorm, 'cifar10')
 train_task('cifar10_LN', LayerNorm, 'cifar10')
 train_task('cifar10_GN', GroupNorm, 'cifar10')
-train_task('cifar10_IN', InstanceNorm, 'cifar10')
 train_task('cifar10_PN', PowerNorm, 'cifar10')
 train_task('cifar10_UN', UnifiedNorm, 'cifar10')
 train_task('cifar10_MABN', MABatchNorm, 'cifar10')

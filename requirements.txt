@@ -1,3 +1,4 @@
+torchvision
 einops
 tensorboard
 timm
