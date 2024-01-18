@@ -1,0 +1,9 @@
+logs/
+models/
+
+data/
+downloadcode/
+ViT归一化方法/
+
+__pycache__/
+
